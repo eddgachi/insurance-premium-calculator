@@ -2,17 +2,6 @@ from app.session import Base
 from sqlalchemy import Column, DateTime, Float, ForeignKey, Integer, String, Text
 
 
-class ApplicationConfig(Base):
-    """Stores global configuration settings for the application."""
-
-    __tablename__ = "application_config"
-
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    config_key = Column(String(50), unique=True, nullable=False)
-    config_value = Column(String(255), nullable=False)
-    description = Column(Text, nullable=True)
-
-
 class QuoteRequest(Base):
     """Tracks what the user asked for when requesting an insurance quote."""
 
