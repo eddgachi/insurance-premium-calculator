@@ -8,7 +8,6 @@ class QuoteRequest(Base):
     __tablename__ = "quote_requests"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    user_id = Column(Integer, nullable=True)  # Reference to a user, if you add auth
     policy_type = Column(String(20), nullable=False)
     age = Column(Integer, nullable=False)
     coverage = Column(Integer, nullable=False)

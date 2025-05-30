@@ -20,7 +20,6 @@ class PremiumResponse(BaseModel):
 
 class QuoteRequestRead(BaseModel):
     id: int
-    user_id: Optional[int]
     policy_type: str
     age: int
     coverage: int
