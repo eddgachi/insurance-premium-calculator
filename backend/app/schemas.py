@@ -6,7 +6,7 @@ from pydantic import BaseModel, Field
 
 
 class PremiumRequest(BaseModel):
-    policy_type: str = Field(..., regex="^(auto|home|life)$")
+    policy_type: str = Field(..., pattern="^(auto|home|life)$")
     age: int = Field(..., ge=18)
     coverage: int = Field(..., gt=0)
     location: str = Field(..., min_length=1)
@@ -28,7 +28,7 @@ class QuoteRequestRead(BaseModel):
     requested_at: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class QuoteResultRead(BaseModel):
@@ -39,4 +39,4 @@ class QuoteResultRead(BaseModel):
     raw_response: Optional[str]
 
     class Config:
-        orm_mode = True
+        from_attributes = True

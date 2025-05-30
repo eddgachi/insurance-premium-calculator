@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
 from fastapi.security import HTTPBearer
 
-from .routes import read_root
+from app.routes import router as prem_router
 
 origins = [
     "http://localhost:5173",
@@ -21,8 +21,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(read_root)
-
+app.include_router(prem_router)
 
 desc = ""
 
