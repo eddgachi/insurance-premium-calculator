@@ -1,50 +1,19 @@
 <template>
-  <div
-    :class="['app-wrapper', { 'sidebar-open': isSidebarOpen }, theme === 'dark' ? 'bg-dark text-light' : 'bg-light']"
-  >
-    <aside
-      :class="[
-        'sidebar',
-        theme === 'dark' ? 'bg-black' : 'bg-white',
-        'shadow-lg border-end',
-        theme === 'dark' ? 'border-secondary' : 'border-light-subtle',
-      ]"
-    >
-      <div class="p-3 d-flex justify-content-between align-items-center border-bottom border-light-subtle">
+  <div :class="['app-wrapper', { 'sidebar-open': isSidebarOpen }, themeClass]">
+    <aside :class="['sidebar', theme === 'dark' ? 'bg-black' : 'bg-white', 'shadow-lg border-end']">
+      <div class="p-3 d-flex justify-content-between align-items-center border-bottom">
         <h2 class="h6 mb-0 fw-semibold">Navigation</h2>
         <button
           class="btn btn-sm btn-close d-lg-none"
           @click="isSidebarOpen = false"
-          :aria-label="'Close sidebar' + (theme === 'dark' ? '' : 'close-white')"
+          aria-label="Close sidebar"
         ></button>
       </div>
       <div class="p-3 sidebar-nav">
         <ul class="list-unstyled">
-          <li>
-            <router-link to="/" class="nav-link" :class="theme === 'dark' ? 'text-light' : 'text-dark'"
-              ><i class="fas fa-fw fa-tachometer-alt me-2"></i>Dashboard</router-link
-            >
-          </li>
-          <li>
-            <router-link to="/history" class="nav-link" :class="theme === 'dark' ? 'text-light' : 'text-dark'"
-              ><i class="fas fa-fw fa-history me-2"></i>Sync History</router-link
-            >
-          </li>
-          <li>
-            <router-link to="/logs" class="nav-link" :class="theme === 'dark' ? 'text-light' : 'text-dark'"
-              ><i class="fas fa-fw fa-clipboard-list me-2"></i>Detailed Logs</router-link
-            >
-          </li>
-          <li>
-            <router-link to="/audit" class="nav-link" :class="theme === 'dark' ? 'text-light' : 'text-dark'"
-              ><i class="fas fa-fw fa-user-secret me-2"></i>Audit Trail</router-link
-            >
-          </li>
-          <li>
-            <router-link to="/config" class="nav-link" :class="theme === 'dark' ? 'text-light' : 'text-dark'"
-              ><i class="fas fa-fw fa-cog me-2"></i>Configuration</router-link
-            >
-          </li>
+          <li><router-link to="/" class="nav-link" :class="linkClass">Home</router-link></li>
+          <li><router-link to="/requests" class="nav-link" :class="linkClass">Quote Requests</router-link></li>
+          <li><router-link to="/results" class="nav-link" :class="linkClass">Quote Results</router-link></li>
         </ul>
       </div>
     </aside>
@@ -52,26 +21,14 @@
 
     <div class="main-content">
       <header :class="['shadow-sm sticky-top z-index-sticky', theme === 'dark' ? 'bg-black' : 'bg-white']">
-        <div class="container-fluid px-4 py-2">
-          <div class="d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center gap-2">
-              <button class="btn btn-sm d-lg-none" @click="isSidebarOpen = !isSidebarOpen" aria-label="Toggle sidebar">
-                <i :class="['fas fa-bars', theme === 'dark' ? 'text-light' : 'text-dark']"></i>
-              </button>
-              <h1 class="h6 mb-0 fw-semibold d-none d-md-inline" :class="theme === 'dark' ? 'text-light' : 'text-dark'">
-                <i class="fas fa-sync-alt me-2 text-primary opacity-75"></i> Qona Sacco Data Sync
-              </h1>
-              <span class="badge bg-success-subtle text-success-emphasis border border-success-subtle fw-medium">
-                <i class="fas fa-check-circle me-1"></i> Connected
-              </span>
-            </div>
-            <div class="flex-grow-1 mx-3 d-none d-lg-block" style="max-width: 400px"></div>
-            <div class="d-flex align-items-center gap-2">
-              <button class="btn btn-sm" @click="toggleTheme" :class="theme === 'dark' ? 'text-warning' : 'text-dark'">
-                <i :class="['fas', theme === 'dark' ? 'fa-sun' : 'fa-moon']"></i>
-              </button>
-            </div>
-          </div>
+        <div class="container-fluid px-4 py-2 d-flex justify-content-between align-items-center">
+          <button class="btn btn-sm d-lg-none" @click="isSidebarOpen = !isSidebarOpen" aria-label="Toggle sidebar">
+            <i :class="['fas fa-bars', theme === 'dark' ? 'text-light' : 'text-dark']"></i>
+          </button>
+          <h1 class="h6 mb-0 fw-semibold" :class="titleClass">Insurance Premium Calculator</h1>
+          <button class="btn btn-sm" @click="toggleTheme" :class="theme === 'dark' ? 'text-warning' : 'text-dark'">
+            <i :class="['fas', theme === 'dark' ? 'fa-sun' : 'fa-moon']"></i>
+          </button>
         </div>
       </header>
 
@@ -89,34 +46,32 @@
           theme === 'dark' ? 'bg-black border-secondary' : 'bg-light border-light-subtle',
         ]"
       >
-        © {{ new Date().getFullYear() }} Qona Sacco Data Sync | Powered by
-        <a href="https://jasco.co.ke/" target="_blank">Jasco Communications</a> | Version 1.2.0 |
-        <a href="#">Privacy Policy</a>
+        © {{ new Date().getFullYear() }} Insurance Premium Calculator <br />
+        made with ❤️
       </footer>
     </div>
   </div>
 </template>
 
 <script>
-// Import Font Awesome if not loaded globally
-// import '@fortawesome/fontawesome-free/css/all.css';
-
-// Import potential global components like NotificationPanel, ToastContainer
-// import NotificationPanel from './components/NotificationPanel.vue';
-// import ToastContainer from './components/ToastContainer.vue';
-
 export default {
   name: 'App',
-  // components: { NotificationPanel, ToastContainer },
   data() {
     return {
       theme: 'light',
       isSidebarOpen: false,
-      // Move global state here if not using Vuex/Pinia
-      // isNotificationPanelOpen: false,
-      // unreadNotifications: 2,
-      // currentUser: { name: 'Nakuru Admin', id: 'admin01' }
     }
+  },
+  computed: {
+    themeClass() {
+      return this.theme === 'dark' ? 'bg-dark text-light' : 'bg-light'
+    },
+    linkClass() {
+      return this.theme === 'dark' ? 'text-light' : 'text-dark'
+    },
+    titleClass() {
+      return this.theme === 'dark' ? 'text-light' : 'text-dark'
+    },
   },
   methods: {
     toggleTheme() {
@@ -124,26 +79,16 @@ export default {
       document.body.setAttribute('data-bs-theme', this.theme)
       localStorage.setItem('dashboardTheme', this.theme)
     },
-    // other global methods (toggle notifications, etc.)
   },
   watch: {
-    // Close mobile sidebar on route change
     $route() {
       this.isSidebarOpen = false
     },
   },
   mounted() {
-    // Apply theme on initial load
     const savedTheme = localStorage.getItem('dashboardTheme')
-    if (savedTheme) {
-      this.theme = savedTheme
-      document.body.setAttribute('data-bs-theme', this.theme)
-    } else {
-      // Set default based on system preference?
-      // const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      // this.theme = prefersDark ? 'dark' : 'light';
-      document.body.setAttribute('data-bs-theme', this.theme)
-    }
+    if (savedTheme) this.theme = savedTheme
+    document.body.setAttribute('data-bs-theme', this.theme)
   },
 }
 </script>

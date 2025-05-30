@@ -1,64 +1,22 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import AuditTrailView from '../views/AuditTrailView.vue'
-import ConfigurationView from '../views/ConfigurationView.vue'
 import DashboardView from '../views/DashboardView.vue'
-import DetailedLogsView from '../views/DetailedLogsView.vue'
-import HistoryView from '../views/HistoryView.vue'
+import QuoteRequestsView from '../views/QuoteRequestsView.vue'
+import QuoteResultsView from '../views/QuoteResultsView.vue'
 
 const routes = [
-  {
-    path: '/',
-    name: 'Dashboard',
-    component: DashboardView,
-    meta: { title: 'Dashboard' }, // Add titles for browser tab
-  },
-  {
-    path: '/history',
-    name: 'History',
-    component: HistoryView,
-    meta: { title: 'Sync History' },
-  },
-  {
-    path: '/logs',
-    name: 'DetailedLogs',
-    component: DetailedLogsView,
-    meta: { title: 'Detailed Logs' },
-  },
-  // Optional: Route for logs specific to a job
-  {
-    path: '/logs/:jobId',
-    name: 'JobLogs',
-    component: DetailedLogsView, // Reuse the same component
-    props: true, // Pass route params as props
-    meta: { title: 'Job Logs' },
-  },
-  {
-    path: '/audit',
-    name: 'AuditTrail',
-    component: AuditTrailView,
-    meta: { title: 'Audit Trail' },
-  },
-  {
-    path: '/config',
-    name: 'Configuration',
-    component: ConfigurationView,
-    meta: { title: 'Configuration' },
-  },
-  // Add a fallback route for 404?
-  // { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFoundView }
+  { path: '/', name: 'Dashboard', component: DashboardView, meta: { title: 'Dashboard' } },
+  { path: '/requests', name: 'QuoteRequests', component: QuoteRequestsView, meta: { title: 'Sync History' } },
+  { path: '/results', name: 'QuoteResults', component: QuoteResultsView, meta: { title: 'Detailed Logs' } },
 ]
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL), // Or createWebHashHistory
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes,
-  linkActiveClass: 'active', // Add Bootstrap's 'active' class to active router links
+  linkActiveClass: 'active',
 })
 
-// Update browser tab title
 router.beforeEach((to, from, next) => {
-  document.title = to.meta.title
-    ? `${to.meta.title} | Insurance Premium Calculator`
-    : 'Insurance Premium Calculator Dashboard'
+  document.title = to.meta.title ? `${to.meta.title} | Insurance Premium Calculator` : 'Insurance Premium Calculator'
   next()
 })
 
