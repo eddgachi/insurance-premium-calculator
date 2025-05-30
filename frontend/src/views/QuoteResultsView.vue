@@ -1,7 +1,12 @@
+<!-- QuoteResultsView.vue -->
+
 <template>
   <div>
     <h3>Quote Results</h3>
-    <table class="table">
+
+    <div v-if="results.length === 0" class="alert alert-info">No quote results available.</div>
+
+    <table v-else class="table">
       <thead>
         <tr>
           <th>ID</th>
@@ -24,14 +29,22 @@
 
 <script>
 import api from '@/api'
+
 export default {
-  name: 'DetailedLogsView',
+  name: 'QuoteResultsView',
   data() {
-    return { results: [] }
+    return {
+      results: [],
+    }
   },
   async mounted() {
-    const res = await api.get('/results')
-    this.results = res.data
+    try {
+      const res = await api.get('/results')
+      this.results = res.data
+    } catch (err) {
+      console.error(err)
+      this.results = []
+    }
   },
 }
 </script>

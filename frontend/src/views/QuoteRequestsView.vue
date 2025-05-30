@@ -1,7 +1,12 @@
+<!-- QuoteRequestsView.vue -->
+
 <template>
   <div>
-    <h3>Past Requests</h3>
-    <table class="table">
+    <h3>Quote Requests</h3>
+
+    <div v-if="requests.length === 0" class="alert alert-info">No quote requests found.</div>
+
+    <table v-else class="table">
       <thead>
         <tr>
           <th>ID</th>
@@ -28,14 +33,22 @@
 
 <script>
 import api from '@/api'
+
 export default {
-  name: 'HistoryView',
+  name: 'QuoteRequestsView',
   data() {
-    return { requests: [] }
+    return {
+      requests: [],
+    }
   },
   async mounted() {
-    const res = await api.get('/requests')
-    this.requests = res.data
+    try {
+      const res = await api.get('/requests')
+      this.requests = res.data
+    } catch (err) {
+      console.error(err)
+      this.requests = []
+    }
   },
 }
 </script>

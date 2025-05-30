@@ -1,3 +1,5 @@
+<!-- DashboardView.vue -->
+
 <template>
   <div>
     <PremiumCalculator />

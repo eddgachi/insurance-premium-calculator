@@ -1,3 +1,5 @@
+<!-- components/PremiumCalculator.vue -->
+
 <template>
   <div class="card p-4">
     <h3>Calculate Premium</h3>

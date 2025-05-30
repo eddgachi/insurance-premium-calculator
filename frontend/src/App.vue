@@ -1,3 +1,5 @@
+<!-- App.vue -->
+
 <template>
   <div :class="['app-wrapper', { 'sidebar-open': isSidebarOpen }, themeClass]">
     <aside :class="['sidebar', theme === 'dark' ? 'bg-black' : 'bg-white', 'shadow-lg border-end']">
