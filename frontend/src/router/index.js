@@ -5,8 +5,8 @@ import QuoteResultsView from '../views/QuoteResultsView.vue'
 
 const routes = [
   { path: '/', name: 'Dashboard', component: DashboardView, meta: { title: 'Dashboard' } },
-  { path: '/requests', name: 'QuoteRequests', component: QuoteRequestsView, meta: { title: 'Sync History' } },
-  { path: '/results', name: 'QuoteResults', component: QuoteResultsView, meta: { title: 'Detailed Logs' } },
+  { path: '/requests', name: 'QuoteRequests', component: QuoteRequestsView, meta: { title: 'Quote Requests' } },
+  { path: '/results', name: 'QuoteResults', component: QuoteResultsView, meta: { title: 'Quote Results' } },
 ]
 
 const router = createRouter({
